@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-
+import { me } from './store/actions/admin';
 import AppRouter from './routers/AppRouter';
 
 class App extends Component {
@@ -14,6 +14,11 @@ class App extends Component {
       </Provider>
     )
   }
+}
+
+let token = localStorage.getItem('token');
+if(token){
+    store.dispatch(me(token));
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));

@@ -9,7 +9,7 @@ const PublicRoute = ({
 }) => (
     <Route {...rest} component = {(props) => (
         auth ? (
-            <Redirect to = '/home' />
+            <Redirect to = '/admin' />
         ):(
             <Component {...props}/>
         )
@@ -17,7 +17,7 @@ const PublicRoute = ({
 );
 
 const mapStateToProps = (state) => ({
-    auth: !!state.user._id
+    auth: !!state.admin._id
 });
 
 export default connect(mapStateToProps)(PublicRoute);
