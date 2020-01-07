@@ -1,8 +1,8 @@
-import {ADMIN_LOGIN} from '../actions/constants'
+import {LOGIN} from '../actions/constants'
 
 const adminReducer = (state = {}, action) => {
     switch (action.type) {
-      case ADMIN_LOGIN:
+      case LOGIN:
         return action.payload
       default:
         return state

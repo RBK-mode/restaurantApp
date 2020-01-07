@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 
-const CustomerPrivateRoute = ({ component: Component,  auth, ...rest }) => (
+const PrivateRoute = ({ component: Component,  auth, ...rest }) => (
     <Route {...rest} render={(props) => (
         auth 
         ? <Component {...props} />
@@ -11,7 +11,7 @@ const CustomerPrivateRoute = ({ component: Component,  auth, ...rest }) => (
   )
 
 const mapStateToProps = (state) => ({
-    auth: !!state.user._id
+    auth: !!state.admin._id
 })
 
-export default connect(mapStateToProps)(CustomerPrivateRoute)
+export default connect(mapStateToProps)(PrivateRoute)

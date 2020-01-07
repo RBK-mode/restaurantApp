@@ -1,12 +1,10 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 
-import AdminPrivateRoute from './AdminPrivateRoute';
-import CustomerPrivateRoute from './CustomerPrivateRoute';
+import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
-import AdminHome from './../components/ControlPanel/Home';
-import CustomerHome from './../components/Customer/Home';
+import Home from './../components/Home';
 
 import Login from './../components/Login';
 import Signup from './../components/Signup';
@@ -18,8 +16,7 @@ const AppRouter = () => {
           <Switch>
             <PublicRoute path = '/' component = {Login} exact/>
             <PublicRoute path = '/signup' component = {Signup} exact/>
-            <AdminPrivateRoute path = '/admin' component = {AdminHome}/>
-            <CustomerPrivateRoute path = '/me' component = {CustomerHome}/>
+            <PrivateRoute path = '/admin' component = {Home}/>
             <Route>
               <div>not found</div>
             </Route>
