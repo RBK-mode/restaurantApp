@@ -7,7 +7,6 @@ import PublicRoute from './PublicRoute';
 import Home from './../components/Home';
 
 import Login from './../components/Login';
-import Signup from './../components/Signup';
 
 const AppRouter = () => {
     return (
@@ -15,7 +14,6 @@ const AppRouter = () => {
         <div>
           <Switch>
             <PublicRoute path = '/' component = {Login} exact/>
-            <PublicRoute path = '/signup' component = {Signup} exact/>
             <PrivateRoute path = '/admin' component = {Home}/>
             <Route>
               <div>not found</div>
