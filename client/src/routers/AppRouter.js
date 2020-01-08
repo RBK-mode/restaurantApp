@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter as Router} from 'react-router-dom';
-import Category from "../components/Category";
+import Category from "../components/CategoryList";
 
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -15,7 +15,7 @@ const AppRouter = () => {
         <div>
           <Switch>
             <PublicRoute path = '/' component = {Login} exact/>
-            {/* <PrivateRoute path = '/admin' component = {Home}/> */}
+            <PrivateRoute path = '/Home' component = {Home}/>
             <PrivateRoute path = '/category' component = {Category}/>
             <Route>
               <div>not found</div>

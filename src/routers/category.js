@@ -28,9 +28,14 @@ router.post('/',auth, async (req, res) => {
 
 router.post('/edit/:id',auth, async (req, res) => {
     try {
+ 
         const data  = req.body;
-        const doc = await Category.findOneAndUpdate({_id: req.params.id},data);
-        res.status(204).json(doc);
+        await Category.findOneAndUpdate({_id: req.params.id},data);
+        const doc = {
+            _id: req.params.id,
+            ...req.body
+        }
+        res.status(200).json(doc);
 
     } catch(error){
         res.status(400).send();

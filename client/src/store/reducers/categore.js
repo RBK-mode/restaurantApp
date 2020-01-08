@@ -7,10 +7,13 @@ const categoryReducer = (state = [], action) => {
         case ADD_CATEGORY:
             return [...state, action.payload]
         case EDIT_CATEGORY: 
-            return []
-            //  state.map((category) =>{
-            //     (category._id === action.payload.id) ? action.payload.category : category;
-            // })
+            let categories = state.map((category) =>{
+                if(category._id === action.payload._id){
+                    return action.payload;
+                }
+                return category;
+            });
+            return categories;
         default: return state;
     }
 }
