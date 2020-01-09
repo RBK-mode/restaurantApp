@@ -6,7 +6,7 @@ export class ItemForm extends Component {
     name: '',
     img: '',
     price: '',
-    categoryId: ''
+    categoryId: this.props.ItemCategory[0]._id || ''
   };
 
   onChangeNameHandler = (e) => {
@@ -26,13 +26,14 @@ export class ItemForm extends Component {
 
   onChangeSelectHandler = (e) => {
     let categoryId = e.target.value;
+    console.log(categoryId, "29")
     this.setState(() => ({ categoryId }));
   };
 
   onSubmitHandler = (e) => {
     e.preventDefault();
     this.props.onSubmit(this.state);
-    console.log(this.state)
+    console.log(this.state, "35")
     this.setState(() => ({
       name: '',
       img: '',
