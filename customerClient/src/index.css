@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+h1 {
+  font-size: 1.8rem;
+}
+
+.categories-container {
+  padding: 10px;
+}
+
+.category-container {
+  margin: auto;
+}
+
+.category-img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: auto;
+}
+
+.category-name {
+  height: 100px;
+  width: 100%;
+  text-align: center;
+}
