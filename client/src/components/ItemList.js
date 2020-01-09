@@ -19,6 +19,7 @@ export class ItemList extends Component {
       },
     });
     const data = await response.json();
+    console.log(data)
     this.props.setItem(data);
   };
 
@@ -62,6 +63,7 @@ export class ItemList extends Component {
         <div>
           {
             this.props.items.map((item) => <ItemItem key={item._id} item={item} />)
+
           }
         </div>
       </div>
