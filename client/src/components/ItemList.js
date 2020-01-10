@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setItem, addItem, editItem } from '../store/actions/item';
+import { addMenuItem, deleteMenuItem } from '../store/actions/menu';
 import ItemItem from './ItemItem';
 import ItemForm from './ItemForm';
 
@@ -24,7 +25,6 @@ export class ItemList extends Component {
 
   addItem = async (param) => {
     try {
-
       const response = await fetch("http://localhost:8000/api/item", {
         method: 'POST',
         headers: {
@@ -36,7 +36,25 @@ export class ItemList extends Component {
       const data = await response.json();
       this.props.addItem({ ...data, ...param });
     } catch (err) {
-      console.log(err)
+      console.log(err);
+    }
+  };
+
+  addToMenu = async (param) => {
+    console.log(param, "param")
+    try {
+      const response = await fetch("http://localhost:8000/api/menu", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'auth': localStorage.getItem('token')
+        },
+        body: JSON.stringify(param)
+      });
+      const data = await response.json();
+      this.props.addMenuItem({ ...data, ...param });
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -71,7 +89,7 @@ export class ItemList extends Component {
 
         <div>
           {
-            this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} />)
+            this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} addToMenu={this.addToMenu} />)
           }
         </div>
       </div>

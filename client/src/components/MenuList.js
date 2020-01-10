@@ -20,19 +20,19 @@ export class MenuList extends Component {
         this.props.setMenu(data);
         console.log(data)
     };
- 
 
-    render(){
+    render() {
         console.log(this.props.menu)
-        return(
+        return (
             <div>
                 {
-                  this.props.menu.map( item => <ItemItem  key={item._id} item={item.itemId} />)
+                    this.props.menu.map(item => <ItemItem key={item._id} item={item.itemId} />)
                 }
             </div>
         )
     }
 }
+
 const mapStateToProps = (state) => ({
     menu: state.menu.map(item => {
         console.log(item)
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    setMenu : (data) => dispatch(setMenu(data))
+        setMenu: (data) => dispatch(setMenu(data))
     }
 }
 
