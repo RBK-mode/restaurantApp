@@ -50,7 +50,10 @@ export class CategoryList extends Component {
     }
 
     onSelectCategory = (selectedCategory)=>{
-        this.setState(()=>({selectedCategory}))
+        this.setState(()=>({selectedCategory: {}}), () => {
+            this.setState(()=>({selectedCategory}))   
+        })
+        
     }
 
     render() {
@@ -62,7 +65,7 @@ export class CategoryList extends Component {
             }
             <div>
                 {
-                  this.props.cateogries.map((category)=> <CategoryItem key={category._id} onSelectCategory={this.onSelectCategory} category={category}/> )   
+                  this.props.cateogries.map((category)=> <CategoryItem key={category._id} onSelectCategory = {this.onSelectCategory} category={category}/> )   
                  
                 }
             </div>
