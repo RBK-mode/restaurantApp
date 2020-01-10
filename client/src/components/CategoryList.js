@@ -49,10 +49,8 @@ export class CategoryList extends Component {
         this.setState(() => ({ selectedCategory: {} }))
     }
 
-    onSelectCategory = (selectedCategory)=>{
-        this.setState(()=>({selectedCategory: {}}), () => {
-            this.setState(()=>({selectedCategory}))   
-        })
+    onSelectCategory = (selectedCategory) => {
+        this.setState(() => ({ selectedCategory }))
     }
 
     render() {
@@ -60,7 +58,7 @@ export class CategoryList extends Component {
             <div>
                 <CategoryForm onSubmit={(category) => this.addCategory(category)} />
                 {
-                  this.props.cateogries.map((category)=> <CategoryItem key={category._id} onSelectCategory = {this.onSelectCategory} category={category}/> )              
+                    this.state.selectedCategory._id && <CategoryForm onSubmit={(category) => this.editCategory(category)} selectedCategory={this.state.selectedCategory} />
                 }
                 <div>
                     {
