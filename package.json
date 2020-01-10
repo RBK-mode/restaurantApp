@@ -5,10 +5,13 @@
   "main": "server.js",
   "scripts": {
     "client-install": "cd client && npm install",
+    "customerClient-install": "cd customerClient && npm install",
     "start": "node server.js",
     "server": "env-cmd -f ./.env nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "customerClient": "npm start --prefix customerClient",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "customer-dev": "concurrently \"npm run server\" \"npm run customerClient\""
   },
   "author": "",
   "license": "MIT",
@@ -17,6 +20,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.4.1",
     "concurrently": "^4.1.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
