@@ -9,6 +9,7 @@ export class Header extends Component {
                 <Link to="/Home">Home</Link>
                 <Link to='/Category'>Categories</Link>
                 <Link to='/Item'>Items</Link>
+                <Link to='/Menu'>Menu</Link>
             </div>
         )
     }
