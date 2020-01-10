@@ -5,7 +5,8 @@ const itemReducer = (state = [], action) => {
     case SET_ITEM:
       return [...action.payload];
     case ADD_ITEM:
-      return [action.payload, ...state];
+      console.log(action.payload, 'jjjjjjjjjjjjjjjjjjjjjjjjjjj')
+      return [...state, action.payload];
     case EDIT_ITEM:
       let items = state.map((item) => {
         if (item._id === action.payload._id) {

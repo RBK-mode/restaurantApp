@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 
 export class ItemForm extends Component {
   state = {
-    name: '',
-    img: '',
-    price: '',
-    categoryId: this.props.ItemCategory[0]._id || ''
+    _id: this.props.selectedItem && this.props.selectedItem._id || '',
+    name: this.props.selectedItem && this.props.selectedItem.name || '',
+    img: this.props.selectedItem && this.props.selectedItem.img || '',
+    price: this.props.selectedItem && this.props.selectedItem.price || '',
+    categoryId: this.props.selectedItem &&
+      this.props.ItemCategory[0]._id || ''
   };
 
   onChangeNameHandler = (e) => {
@@ -26,15 +28,18 @@ export class ItemForm extends Component {
 
   onChangeSelectHandler = (e) => {
     let categoryId = e.target.value;
-    console.log(categoryId, "29")
     this.setState(() => ({ categoryId }));
   };
 
   onSubmitHandler = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
-    console.log(this.state, "35")
+    let item = {
+      ...this.state,
+      categoryId: this.props.ItemCategory.filter((item) => item._id === this.state.categoryId)[0]
+    }
+    this.props.onSubmit(item);
     this.setState(() => ({
+      _id: '',
       name: '',
       img: '',
       price: '',

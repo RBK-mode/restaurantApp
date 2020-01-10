@@ -5,7 +5,6 @@ const categoryReducer = (state = [], action) => {
         case SET_CATEGORY:
             return [...action.payload]
         case ADD_CATEGORY:
-            console.log(action.payload)
             return [...state, action.payload]
         case EDIT_CATEGORY:
             let categories = state.map((category) => {
