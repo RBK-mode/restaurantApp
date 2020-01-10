@@ -17,7 +17,7 @@ const PublicRoute = ({
 );
 
 const mapStateToProps = (state) => ({
-    auth: !!state.admin._id
+    auth: !!state.user._id
 });
 
 export default connect(mapStateToProps)(PublicRoute);

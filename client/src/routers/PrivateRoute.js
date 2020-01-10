@@ -1,11 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
+import Header from "../components/Header";
 
 const PrivateRoute = ({ component: Component,  auth, ...rest }) => (
     <Route {...rest} render={(props) => (
         auth 
-        ? <Component {...props} />
+        ? (<div>
+            <Header/>
+            <Component {...props} />
+        </div>)
         : <Redirect to='/' />
     )} />
   )
