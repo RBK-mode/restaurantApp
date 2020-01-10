@@ -8,3 +8,7 @@ export const EDIT_CATEGORY = 'EDIT_CATEGORY';
 export const SET_ITEM = 'SET_ITEM';
 export const ADD_ITEM = 'ADD_ITEM';
 export const EDIT_ITEM = 'EDIT_ITEM';
+
+export const SET_MENU = 'SET_MENU';
+export const ADD_MENU_ITEM = 'ADD_MENU_ITEM';
+export const DELETE_MENU_ITEM = 'DELETE_MENU_ITEM';

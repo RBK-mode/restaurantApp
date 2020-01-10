@@ -1,7 +1,7 @@
 {
-  "name": "restaurant-app",
+  "name": "resturant",
   "version": "1.0.0",
-  "description": "",
+  "description": "> Create full stack apps with React/Redux and Express. Run your client and server with a single command",
   "main": "server.js",
   "scripts": {
     "client-install": "cd client && npm install",
@@ -23,5 +23,13 @@
     "mongoose": "^5.8.5",
     "nodemon": "^1.19.1",
     "react-router-dom": "^5.1.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FatimaMabrouk/restaurantApp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FatimaMabrouk/restaurantApp/issues"
+  },
+  "homepage": "https://github.com/FatimaMabrouk/restaurantApp#readme"
 }
