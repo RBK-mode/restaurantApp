@@ -1,8 +1,12 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import adminReducer from './admin';
-import userReducer from './user';
+import categoryReducer from './categore';
+import itemReducer from './item';
+import menuReducer from './menu';
 
 export default combineReducers({
-  user: userReducer,
-  admin: adminReducer
-})
+    admin: adminReducer,
+    cateogries: categoryReducer,
+    items: itemReducer,
+    menu: menuReducer
+});
