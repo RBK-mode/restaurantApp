@@ -8,7 +8,7 @@ const menuReducer = (state = [], action) => {
             return [action.payload, ...state];
         case DELETE_MENU_ITEM:
             let filtredItem = state.filter(item => {
-                return item.itemId._id !== action.payload.itemId._id;
+                return item.itemId._id !== action.payload;
             });
 
             return filtredItem;
