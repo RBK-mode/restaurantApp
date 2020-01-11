@@ -33,7 +33,6 @@ export class CategoryList extends Component {
         });
         const data = await response.json();
         this.props.addCategory(data)
-        //   console.log(this.props.cateogries);    
     }
     editCategory = async (param) => {
         const response = await fetch("http://localhost:8000/api/category/edit/" + param._id, {
