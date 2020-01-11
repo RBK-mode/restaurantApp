@@ -41,7 +41,7 @@ export class ItemList extends Component {
   };
 
   addToMenu = async (param) => {
-    console.log(param, "param")
+    console.log(param, 'hhhhhhhhhhhhhhhhhhhhh')
     try {
       const response = await fetch("http://localhost:8000/api/menu", {
         method: 'POST',
@@ -49,10 +49,10 @@ export class ItemList extends Component {
           'Content-Type': 'application/json',
           'auth': localStorage.getItem('token')
         },
-        body: JSON.stringify(param)
+        body: JSON.stringify({ itemId: param })
       });
       const data = await response.json();
-      this.props.addMenuItem({ ...data, ...param });
+      this.props.addMenuItem(data);
     } catch (err) {
       console.log(err);
     }
@@ -111,6 +111,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     editItem: (data) => {
       dispatch(editItem(data));
+    },
+    addMenuItem: (data) => {
+      dispatch(addMenuItem(data));
     }
   }
 }
