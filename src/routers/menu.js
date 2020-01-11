@@ -5,7 +5,7 @@ const Category = require('../models/category');
 
 const router = express.Router();
 
-router.get('/', auth, async(req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         const doc = await Menu.find().populate('itemId').exec();
         res.status(200).json(doc);
@@ -15,12 +15,14 @@ router.get('/', auth, async(req, res) => {
     }
 });
 
-router.post('/', auth, async(req, res) => {
+router.post('/', auth, async (req, res) => {
     try {
         const { itemId } = req.body;
-        var menu = new Menu({ itemId });
+        console.log(itemId)
+        var menu = new Menu({ itemId: itemId });
         const doc = await menu.save();
-        res.status(201).json(doc);
+        const doc2 = await Menu.findById({ _id: itemId }).populate('itemId').exec();
+        res.status(201).json(doc2);
     } catch (err) {
         console.log(err)
         res.status(400).send();
@@ -28,7 +30,7 @@ router.post('/', auth, async(req, res) => {
 
 });
 
-router.delete('/delete/:id', auth, async(req, res) => {
+router.delete('/delete/:id', auth, async (req, res) => {
     try {
         await Menu.findByIdAndDelete(req.params.id);
         res.status(200).json('removed');
