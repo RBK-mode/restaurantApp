@@ -1,32 +1,34 @@
 import React from 'react';
-import { Route, Switch, BrowserRouter as Router} from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import Category from '../components/CategoryList';
+import Item from '../components/ItemList';
+import Menu from '../components/MenuList';
 
-import AdminPrivateRoute from './AdminPrivateRoute';
-import CustomerPrivateRoute from './CustomerPrivateRoute';
+import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
-import AdminHome from './../components/ControlPanel/Home';
-import CustomerHome from './../components/Customer/Home';
+import Home from './../components/Home';
 
 import Login from './../components/Login';
-import Signup from './../components/Signup';
 
 const AppRouter = () => {
-    return (
+  return (
     <Router>
-        <div>
-          <Switch>
-            <PublicRoute path = '/' component = {Login} exact/>
-            <PublicRoute path = '/signup' component = {Signup} exact/>
-            <AdminPrivateRoute path = '/admin' component = {AdminHome}/>
-            <CustomerPrivateRoute path = '/me' component = {CustomerHome}/>
-            <Route>
-              <div>not found</div>
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    )
+      <div>
+        <Switch>
+          <PublicRoute path='/' component={Login} exact />
+          <PrivateRoute path='/Home' component={Home} />
+          <PrivateRoute path='/category' component={Category} />
+          <PrivateRoute path='/item' component={Item} />
+          <PrivateRoute path='/menu' component={Menu} />
+
+          <Route>
+            <div>not found</div>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
 export default AppRouter;
