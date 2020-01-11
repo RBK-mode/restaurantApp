@@ -41,7 +41,6 @@ export class ItemList extends Component {
   };
 
   addToMenu = async (param) => {
-    console.log(param, 'hhhhhhhhhhhhhhhhhhhhh')
     try {
       const response = await fetch("http://localhost:8000/api/menu", {
         method: 'POST',
