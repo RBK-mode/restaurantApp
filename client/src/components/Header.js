@@ -47,6 +47,11 @@ export class Header extends Component {
                                     <Link to='/Menu'>Menu</Link>
                                 </NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink>
+                                    <Link to='/Customer'>Customers</Link>
+                                </NavLink>
+                            </NavItem>
                             <NavbarText>4 Glasses</NavbarText>
                         </Nav>
                     </Collapse>

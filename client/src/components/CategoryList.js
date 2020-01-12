@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setCategory, addCategory, editCategory } from '../store/actions/cateogry';
+import { addCategory, editCategory } from '../store/actions/cateogry';
 import CategoryItem from './CategoryItem';
 import CategoryForm from './CategoryForm';
 
@@ -64,7 +64,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        
+
         addCategory: (data) => {
             dispatch(addCategory(data));
         },

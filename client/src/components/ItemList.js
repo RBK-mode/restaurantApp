@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setItem, addItem, editItem } from '../store/actions/item';
+import { addItem, editItem } from '../store/actions/item';
 import { addMenuItem, deleteMenuItem } from '../store/actions/menu';
 import ItemItem from './ItemItem';
 import ItemForm from './ItemForm';
