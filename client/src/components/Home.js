@@ -57,7 +57,6 @@ class Home extends Component {
             }
         });
         const dataOrder = await responseOrder.json();
-        console.log(dataOrder);
         this.props.setOrder(dataOrder);
     }
 
