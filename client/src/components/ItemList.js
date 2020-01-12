@@ -11,18 +11,6 @@ export class ItemList extends Component {
     selectedItem: {}
   }
 
-  async componentDidMount() {
-    const response = await fetch("http://localhost:8000/api/item", {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'auth': localStorage.getItem('token')
-      },
-    });
-    const data = await response.json();
-    this.props.setItem(data);
-  };
-
   addItem = async (param) => {
     try {
       const response = await fetch("http://localhost:8000/api/item", {
@@ -40,24 +28,7 @@ export class ItemList extends Component {
     }
   };
 
-  addToMenu = async (param) => {
-    console.log(param, "param")
-    try {
-      const response = await fetch("http://localhost:8000/api/menu", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'auth': localStorage.getItem('token')
-        },
-        body: JSON.stringify(param)
-      });
-      const data = await response.json();
-      this.props.addMenuItem({ ...data, ...param });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+ 
   editItem = async (param) => {
     const response = await fetch("http://localhost:8000/api/item/edit/" + param._id, {
       method: 'POST',
@@ -89,7 +60,7 @@ export class ItemList extends Component {
 
         <div>
           {
-            this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} addToMenu={this.addToMenu} />)
+            this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} />)
           }
         </div>
       </div>
@@ -103,14 +74,17 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setItem: (data) => {
-      dispatch(setItem(data));
-    },
-    addItem: (data) => {
+       addItem: (data) => {
       dispatch(addItem(data));
     },
     editItem: (data) => {
       dispatch(editItem(data));
+    },
+    addMenuItem: (data) => {
+      dispatch(addMenuItem(data));
+    },
+    deleteMenuItem:(data) =>{
+        dispatch(deleteMenuItem(data));
     }
   }
 }

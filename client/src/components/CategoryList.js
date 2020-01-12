@@ -10,18 +10,6 @@ export class CategoryList extends Component {
         selectedCategory: {}
     }
 
-    async componentDidMount() {
-        const response = await fetch("http://localhost:8000/api/category", {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-                'Content-Type': 'application/json',
-                'auth': localStorage.getItem('token')
-            },
-        });
-        const data = await response.json();
-        this.props.setCategory(data);
-    }
-
     addCategory = async (param) => {
         const response = await fetch("http://localhost:8000/api/category", {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -33,7 +21,6 @@ export class CategoryList extends Component {
         });
         const data = await response.json();
         this.props.addCategory(data)
-        //   console.log(this.props.cateogries);    
     }
     editCategory = async (param) => {
         const response = await fetch("http://localhost:8000/api/category/edit/" + param._id, {
@@ -77,9 +64,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCategory: (data) => {
-            dispatch(setCategory(data));
-        },
+        
         addCategory: (data) => {
             dispatch(addCategory(data));
         },

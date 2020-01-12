@@ -57,7 +57,7 @@ export class Signup extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for="exampleEmail">Phone Number</Label>
-                        <Input type="number" name="phone number" placeholder="0928133445" onChange = {this.handlePhoneNumberChange} value = {this.state.phoneNumber}/>
+                        <Input type="text" name="phone number" placeholder="0928133445" onChange = {this.handlePhoneNumberChange} value = {this.state.phoneNumber}/>
                     </FormGroup>
                     <FormGroup>
                         <Label for="examplePassword">Password</Label>
