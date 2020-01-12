@@ -5,42 +5,11 @@ import { connect } from 'react-redux';
 import { Row, Button } from 'reactstrap';
 
 import MenuItem from './MenuItem';
-import { requestOrderActionCreator } from './../store/actions/request';
+import { requestOrder } from './../store/actions/request';
 
-const menuData = [
-    {
-        _id: 'frisfvcfdces879789',
-        name: 'fries',
-        img: 'https://images.unsplash.com/photo-1549128247-37e905ebdb3f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-        price: 8,
-        deleted: false,
-        categoryId: 'sfclehfie'
-    },
-    {
-        _id: 'vfvrtb6758786',
-        name: 'rice',
-        img: 'https://image.shutterstock.com/image-photo/grilled-sandwich-cheese-vegetables-green-260nw-779730214.jpg',
-        price: 4,
-        deleted: false,
-        categoryId: 'csdfsdffs'
-    },
-    {
-        _id: 'sdfvdhhhh2342',
-        name: 'choclate',
-        img: 'https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe_images/recipe-image-legacy-id--1043451_11.jpg?itok=Z_w2WOYB',
-        price: 8,
-        deleted: false,
-        categoryId: 'sfclehfie'
-    },
-    {
-        _id: 'sdfsfefggewedw',
-        name: 'juice',
-        img: 'https://image.shutterstock.com/image-photo/supreme-pizza-lifted-slice-1-260nw-84904912.jpg',
-        deleted: false,
-        price: 8,
-        categoryId: 'sfclehfie'
-    },
-]
+import openSocket from 'socket.io-client';
+const  socket = openSocket('http://localhost:8000');
+
 export class Menu extends Component {
     state = {
         location: {
@@ -89,6 +58,7 @@ export class Menu extends Component {
                 latitude: startPos.coords.latitude,
                 longitude: startPos.coords.longitude
             }}));
+            return Promise.resolve(this.state.location);
         //   document.getElementById('startLon').innerHTML = startPos.coords.longitude;
         };
         let geoError = (error) => {
@@ -96,6 +66,7 @@ export class Menu extends Component {
           if(error.code === 1){
               alert('please let the system get access to your location');
           }
+          return Promise.reject(error);
           // error.code can be:
           //   0: unknown error
           //   1: permission denied
@@ -106,9 +77,30 @@ export class Menu extends Component {
         navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
     }
 
-    onRequestOrder = () => {
-        this.getUserLocation();
-        // this.props.requestOrder()
+    onRequestOrder = async () => {
+        try{
+            await this.getUserLocation();
+            let order = {
+                location: this.state.location,
+                items_list: this.state.itemsList.map(item => {
+                    return {
+                        ...item,
+                        categoryId: item.categoryId._id
+                    }
+                }),
+                customerId: this.props.user._id
+            }
+            console.log(order)
+            try{
+                let req = await this.props.requestOrder(order);  
+                socket.emit('new-order', this.props.user, order); 
+            } catch(err) {
+                console.log(err)
+            }
+            
+        } catch(err) {
+            alert(' sorry, we couldnt access your location.')
+        }
     }
 
     render() {
@@ -131,11 +123,12 @@ const mapStateToProps = (state) => ({
     menu: state.menu.map(item => {
         item.itemId.categoryId = state.category.filter(cat => cat._id === item.itemId.categoryId)[0] || '';
         return item;
-    })
+    }), 
+    user: state.user
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    requestOrder: (order) => dispatch(requestOrderActionCreator(order))
+    requestOrder: (order) => dispatch(requestOrder(order))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu)
