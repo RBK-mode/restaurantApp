@@ -30,7 +30,6 @@ router.post('/edit/:id', auth, async (req, res) => {
   try {
     const data = req.body;
     await Item.findOneAndUpdate({ _id: req.params.id }, data);
-    // send the body with the id to payload
     const doc = {
       _id: req.params.id,
       ...req.body

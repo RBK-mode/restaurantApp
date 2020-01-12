@@ -7,7 +7,7 @@ const Order = require("../models/Order");
 
 router.get('/', authAdmin, async (req, res) => {
     try {
-        const doc = await Order.find();
+        const doc = await Order.find().populate('customerId').exec();
         res.json(doc)
     } catch (error) {
         res.status(400).send();
