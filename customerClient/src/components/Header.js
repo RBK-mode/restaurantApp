@@ -26,7 +26,7 @@ class Header extends Component{
 
     toggleCategory = () => this.setState((prev) => ({isCategoryOpen: !prev.isCategoryOpen}));
 
-    toggle = () => this.setState({isOpen: true});
+    toggle = () => this.setState((prev) => ({isOpen: !prev.isOpen}));
 
     render(){
     return (
@@ -55,7 +55,10 @@ class Header extends Component{
                     {this.props.user.name}
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem onClick = {() => { this.props.logout()}}>
+                  <DropdownItem onClick = {() => {
+                      console.log('dd')
+                      this.props.logout();
+                    }}>
                     Logout
                   </DropdownItem>
                 </DropdownMenu>
