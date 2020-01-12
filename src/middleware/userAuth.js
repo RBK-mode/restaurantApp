@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-const auth = async(req, res, next) => {
+const userAuth = async(req, res, next) => {
     const token = req.header('auth').replace('Bearer ', '');
     const data = jwt.verify(token, process.env.JWT_KEY);
     try {
@@ -9,12 +9,18 @@ const auth = async(req, res, next) => {
         if(!user){
             throw new Error();
         }
-        req.user = user;
+        req.user = {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            phoneNumber: user.phoneNumber
+        };
         req.token = token;
         next();
     } catch(error) {
+        console.log(error)
         res.status(401).send({error: 'sorry you are not authenticated'})
     }
 }
 
-module.exports = auth;
+module.exports = userAuth;

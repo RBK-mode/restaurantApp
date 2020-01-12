@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setCategory, addCategory, editCategory } from '../store/actions/cateogry';
+import { addCategory, editCategory } from '../store/actions/cateogry';
 import CategoryItem from './CategoryItem';
 import CategoryForm from './CategoryForm';
 
@@ -8,18 +8,6 @@ import CategoryForm from './CategoryForm';
 export class CategoryList extends Component {
     state = {
         selectedCategory: {}
-    }
-
-    async componentDidMount() {
-        const response = await fetch("http://localhost:8000/api/category", {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-                'Content-Type': 'application/json',
-                'auth': localStorage.getItem('token')
-            },
-        });
-        const data = await response.json();
-        this.props.setCategory(data);
     }
 
     addCategory = async (param) => {
@@ -76,9 +64,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCategory: (data) => {
-            dispatch(setCategory(data));
-        },
+
         addCategory: (data) => {
             dispatch(addCategory(data));
         },

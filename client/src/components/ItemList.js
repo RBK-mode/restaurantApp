@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setItem, addItem, editItem } from '../store/actions/item';
+import { addItem, editItem } from '../store/actions/item';
 import { addMenuItem, deleteMenuItem } from '../store/actions/menu';
 import ItemItem from './ItemItem';
 import ItemForm from './ItemForm';
@@ -10,18 +10,6 @@ export class ItemList extends Component {
   state = {
     selectedItem: {}
   }
-
-  async componentDidMount() {
-    const response = await fetch("http://localhost:8000/api/item", {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'auth': localStorage.getItem('token')
-      },
-    });
-    const data = await response.json();
-    this.props.setItem(data);
-  };
 
   addItem = async (param) => {
     try {
@@ -40,23 +28,6 @@ export class ItemList extends Component {
     }
   };
 
-  addToMenu = async (param) => {
-    console.log(param, 'hhhhhhhhhhhhhhhhhhhhh')
-    try {
-      const response = await fetch("http://localhost:8000/api/menu", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'auth': localStorage.getItem('token')
-        },
-        body: JSON.stringify({ itemId: param })
-      });
-      const data = await response.json();
-      this.props.addMenuItem(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   editItem = async (param) => {
     const response = await fetch("http://localhost:8000/api/item/edit/" + param._id, {
@@ -89,7 +60,7 @@ export class ItemList extends Component {
 
         <div>
           {
-            this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} addToMenu={this.addToMenu} />)
+            this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} />)
           }
         </div>
       </div>
@@ -103,9 +74,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setItem: (data) => {
-      dispatch(setItem(data));
-    },
     addItem: (data) => {
       dispatch(addItem(data));
     },
@@ -114,6 +82,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     addMenuItem: (data) => {
       dispatch(addMenuItem(data));
+    },
+    deleteMenuItem: (data) => {
+      dispatch(deleteMenuItem(data));
     }
   }
 }

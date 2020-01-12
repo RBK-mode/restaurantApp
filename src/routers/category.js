@@ -4,7 +4,7 @@ const auth = require("../middleware/adminAuth");
 
 const Category = require("../models/category");
 
-router.get('/',auth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const doc = await Category.find();
          res.json(doc)

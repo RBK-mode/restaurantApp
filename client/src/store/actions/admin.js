@@ -50,8 +50,8 @@ export const logoutActionCreator = () => ({
 export const logout = (token) => async dispatch => {
     try{
         let response = await fetch('http://localhost:8000/api/admin/me/logout', {
-            method: 'GET',
-            headers: {
+            method: 'POST',
+            headers: { 
                 'Content-Type': 'application/json',
                 'auth': token
             }

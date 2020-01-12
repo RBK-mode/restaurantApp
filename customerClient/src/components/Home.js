@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 
 import { logout } from './../store/actions/user';
+import { setMenu } from './../store/actions/menu';
+import { setCategory } from './../store/actions/category';
 
 import Header from './Header';
 import Menu from './Menu';
-import Category from './Category';
 
 class Home extends Component {
+    componentDidMount(){
+        this.props.setMenu();
+        this.props.setCategory();
+    }
+
+    onOrder = () => {
+
+    }
+
     render() {
         return (
             <div>
@@ -18,7 +28,7 @@ class Home extends Component {
                     <Row>
                         <h1>Welcome</h1>
                     </Row>
-                    <Menu/>
+                    <Menu />
                 </Container>
             </div>
         )
@@ -30,7 +40,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    setMenu: () => dispatch(setMenu()),
+    setCategory: () => dispatch(setCategory())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
