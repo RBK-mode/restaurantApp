@@ -52,6 +52,11 @@ export class Header extends Component {
                                     <Link to='/Customer'>Customers</Link>
                                 </NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink>
+                                    <Link to='/Order'>Orders</Link>
+                                </NavLink>
+                            </NavItem>
                             <NavbarText>4 Glasses</NavbarText>
                         </Nav>
                     </Collapse>
