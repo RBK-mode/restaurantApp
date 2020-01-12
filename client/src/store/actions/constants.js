@@ -14,3 +14,5 @@ export const ADD_MENU_ITEM = 'ADD_MENU_ITEM';
 export const DELETE_MENU_ITEM = 'DELETE_MENU_ITEM';
 
 export const SET_CUSTOMER = 'SET_CUSTOMER';
+
+export const SET_ORDER = 'SET_ORDER';
