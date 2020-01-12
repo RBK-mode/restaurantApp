@@ -6,6 +6,7 @@ import { setItem } from '../store/actions/item';
 import { setCategory } from '../store/actions/cateogry';
 import { setCustomer } from '../store/actions/customer';
 import { setOrder } from '../store/actions/order';
+import moment from 'moment';
 
 class Home extends Component {
     async componentDidMount() {
@@ -56,8 +57,16 @@ class Home extends Component {
                 'auth': localStorage.getItem('token')
             }
         });
-        const dataOrder = await responseOrder.json();
-        console.log(dataOrder);
+        var dataOrder = await responseOrder.json();
+        dataOrder = dataOrder.map(order => {
+            var total = 0;
+            order.items_list.map(item => {
+                total += item.price;
+            })
+            order.total = total;
+            order.createdAt = moment(new Date(order.createdAt)).format('YYYY-MM-DD HH:mm');
+            return order;
+        });
         this.props.setOrder(dataOrder);
     }
 
