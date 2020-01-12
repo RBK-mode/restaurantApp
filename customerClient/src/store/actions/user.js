@@ -69,17 +69,20 @@ export const logoutActionCreator = () => ({
 export const logout = (token) => async dispatch => {
     try{
         let response = await fetch('http://localhost:8000/api/user/me/logout', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'auth': token
             }
         });
         if(response.status === 200){
+            console.log(response)
             dispatch(logoutActionCreator());
             localStorage.removeItem('token');
         }
+        console.log(response)
     } catch(err) {
+
         console.log(err)
     }
 }
