@@ -39,16 +39,16 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async function () {
     const user = this;
-    const token = jwt.sign({_id: user._id}, process.env.JWT_KEY);
-    user.tokens = user.tokens.concat({token: token});
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY);
+    user.tokens = user.tokens.concat({ token: token });
     await user.save();
     return token;
 }
 
 userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({ email});
+    const user = await User.findOne({ email });
     if (!user) {
         throw new Error({ error: 'Invalid login credentials' });
     }
@@ -58,6 +58,18 @@ userSchema.statics.findByCredentials = async (email, password) => {
     }
     return user;
 }
+
+userSchema.methods.toJSON = function () {
+    let user = this;
+    let userObject = user.toObject();
+
+    return {
+        _id: userObject._id,
+        name: userObject.name,
+        email: userObject.email,
+        phoneNumber: userObject.phoneNumber
+    }
+};
 
 const User = mongoose.model('User', userSchema);
 

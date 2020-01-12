@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setItem, addItem, editItem } from '../store/actions/item';
+import { addItem, editItem } from '../store/actions/item';
 import { addMenuItem, deleteMenuItem } from '../store/actions/menu';
 import ItemItem from './ItemItem';
 import ItemForm from './ItemForm';
@@ -28,7 +28,7 @@ export class ItemList extends Component {
     }
   };
 
- 
+
   editItem = async (param) => {
     const response = await fetch("http://localhost:8000/api/item/edit/" + param._id, {
       method: 'POST',
@@ -74,7 +74,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-       addItem: (data) => {
+    addItem: (data) => {
       dispatch(addItem(data));
     },
     editItem: (data) => {
@@ -83,8 +83,8 @@ const mapDispatchToProps = (dispatch) => {
     addMenuItem: (data) => {
       dispatch(addMenuItem(data));
     },
-    deleteMenuItem:(data) =>{
-        dispatch(deleteMenuItem(data));
+    deleteMenuItem: (data) => {
+      dispatch(deleteMenuItem(data));
     }
   }
 }
