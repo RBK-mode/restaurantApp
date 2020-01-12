@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { me } from './store/actions/admin';
 import AppRouter from './routers/AppRouter';
+import 'bootstrap/dist/css/bootstrap.css';
+import './index.css';
 
 class App extends Component {
 

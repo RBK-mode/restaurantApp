@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from './../store/actions/admin';
+import {Row, Col, Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap';
+import '../index.css';
 
 export class Login extends Component {
     constructor(props){
@@ -37,7 +39,9 @@ export class Login extends Component {
         return (
             <div>
                 <form onSubmit = {this.handleSubmit}>
-                    <input type = 'text' placeholder = 'Email' value = {this.state.email} onChange = {this.handleEmailChange}/>
+                 <FormGroup className='myform'> 
+                    <Input type = 'text' placeholder = 'Email' value = {this.state.email} onChange = {this.handleEmailChange}/>
+                    </FormGroup>
                     <input type = 'password' placeholder = 'Password' value = {this.state.password} onChange = {this.handlePasswordChange}/>
                     <button>Submit</button>
                 </form>

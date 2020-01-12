@@ -4,6 +4,8 @@ import { setItem, addItem, editItem } from '../store/actions/item';
 import { addMenuItem, deleteMenuItem } from '../store/actions/menu';
 import ItemItem from './ItemItem';
 import ItemForm from './ItemForm';
+import { Collapse, Button, CardBody, Card, Col, Row } from 'reactstrap';
+import '../index.css';
 
 
 export class ItemList extends Component {
@@ -59,9 +61,12 @@ export class ItemList extends Component {
         }
 
         <div>
+        <Row>
           {
             this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} />)
           }
+          </Row>
+          
         </div>
       </div>
     )
