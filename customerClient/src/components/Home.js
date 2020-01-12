@@ -10,14 +10,11 @@ import { setCategory } from './../store/actions/category';
 import Header from './Header';
 import Menu from './Menu';
 
+
 class Home extends Component {
     componentDidMount(){
-        this.props.setMenu();
         this.props.setCategory();
-    }
-
-    onOrder = () => {
-
+        this.props.setMenu();
     }
 
     render() {

@@ -4,6 +4,7 @@ import Category from '../components/CategoryList';
 import Item from '../components/ItemList';
 import Menu from '../components/MenuList';
 import Customer from '../components/CustomerList';
+import Order from '../components/OrderList';
 
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -23,6 +24,7 @@ const AppRouter = () => {
           <PrivateRoute path='/item' component={Item} />
           <PrivateRoute path='/menu' component={Menu} />
           <PrivateRoute path='/customer' component={Customer} />
+          <PrivateRoute path='/order' component={Order} />
 
           <Route>
             <div>not found</div>
