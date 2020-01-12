@@ -4,21 +4,37 @@ export default function OrderItem(props) {
   return (
     <tr>
       <td>
+        {<p>{props.order.customerId.name}</p>}
+      </td>
+      <td>
+        {<p>{props.order.state}</p>}
+      </td>
+      <td>
         {
           props.order.items_list.map(item => {
-            return <h5>{item.name}</h5>
+            return <p>{item.name}</p>
           })
         }
       </td>
       <td>
         {
           props.order.items_list.map(item => {
-            return <h5>{item.quantity}</h5>
+            return <p>{item.quantity}</p>
           })
         }
       </td>
       <td>
-        {props.order.createdAt}
+        {
+          props.order.items_list.map(item => {
+            return <p>{item.price}</p>
+          })
+        }
+      </td>
+      <td>
+        <p>{props.order.total}</p>
+      </td>
+      <td>
+        <p>{props.order.createdAt}</p>
       </td>
     </tr>
   )

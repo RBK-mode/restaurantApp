@@ -11,8 +11,12 @@ export class OrderList extends Component {
         <Table>
           <thead>
             <tr>
+              <th>Customer</th>
+              <th>State</th>
               <th>Items</th>
               <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
               <th>Created_at</th>
             </tr>
           </thead>
