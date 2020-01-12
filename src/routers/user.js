@@ -1,6 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
-const auth = require('../middleware/userAuth');
+const userAuth = require('../middleware/userAuth');
 
 const router = express.Router();
 
@@ -32,18 +32,20 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/me', auth, async (req, res) => {
+router.get('/me', userAuth, async (req, res) => {
     res.send(req.user);
 });
 
-router.post('/me/logout', auth, async (req, res) => {
+router.post('/me/logout', userAuth, async (req, res) => {
     try {
+        console.log(req.user)
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token != req.token;
         });
         await req.user.save();
         res.send();
-    } catch(error) {
+    } catch(err) {
+        console.log(err)
         res.status(500).send();
     }
 });
