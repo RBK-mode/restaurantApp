@@ -5,7 +5,8 @@ import { setMenu } from '../store/actions/menu';
 import { setItem } from '../store/actions/item';
 import { setCategory } from '../store/actions/cateogry';
 import { setCustomer } from '../store/actions/customer';
-
+import { setOrder } from '../store/actions/order';
+import moment from 'moment';
 
 class Home extends Component {
     async componentDidMount() {
@@ -48,6 +49,25 @@ class Home extends Component {
         });
         const dataCustomer = await responseCustomer.json();
         this.props.setCustomer(dataCustomer);
+
+        const responseOrder = await fetch("http://localhost:8000/api/order", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth': localStorage.getItem('token')
+            }
+        });
+        var dataOrder = await responseOrder.json();
+        dataOrder = dataOrder.map(order => {
+            var total = 0;
+            order.items_list.map(item => {
+                total += item.price;
+            })
+            order.total = total;
+            order.createdAt = moment(new Date(order.createdAt)).format('DD-MM-YYYY HH:mm');
+            return order;
+        });
+        this.props.setOrder(dataOrder);
     }
 
     render() {
@@ -75,6 +95,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setCustomer: (data) => {
         dispatch(setCustomer(data));
+    },
+    setOrder: (data) => {
+        dispatch(setOrder(data));
     }
 })
 

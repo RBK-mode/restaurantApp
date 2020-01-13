@@ -5,7 +5,6 @@ import { Table, Container } from 'reactstrap';
 
 export class CustomerList extends Component {
   render() {
-    console.log(this.props.customers);
     return (
       <Container>
         <Table>
