@@ -9,6 +9,7 @@ router.get('/',auth, async (req, res) => {
         const doc = await Order.find();
          res.json(doc)
     } catch(error){
+        console.log(error)
         res.status(400).send();
     }
 });
@@ -20,6 +21,7 @@ router.post('/',auth, async (req, res) => {
         res.status(201).json(doc);
 
     } catch(error){
+        console.log(error)
         res.status(400).send();
     }
 })

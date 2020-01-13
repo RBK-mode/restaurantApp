@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from './../store/actions/user';
-import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { Button,Col, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import '../index.css';
 

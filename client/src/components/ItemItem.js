@@ -18,8 +18,9 @@ import '../index.css';
      
       
       <div className="dropdown-content">
-        <img src={props.item.img} style={{height: '300px',width:'300px'}}/>
-        <div className="desc"><h5>Price: ${props.item.price}</h5>
+        <img src={props.item.img} style={{height: '250px',width:'250px'}}/>
+        <div className="desc">
+          <h5>Price: ${props.item.price}</h5>
         { props.item.categoryId && <h5>Category: {props.item.categoryId.name}</h5>}
         </div>
       </div>

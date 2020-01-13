@@ -1,16 +1,24 @@
-import React from 'react'
-import {Row, Col, Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap';
-import '../index.css';
+import React from 'react';
+import {
+    Card, CardImg, CardText, CardBody, CardLink,
+    CardTitle, CardSubtitle
+} from 'reactstrap';
 
 export default function CategoryItem(props) {
+    var inline = {
+        display: 'flex',
+        flexDirection: 'row',
+
+    }
     return (
-        <Col className = 'category-container'>
-        <div onClick={ () => props.onSelectCategory(props.category) }>
-        <div className="dropdown">
-           <h4>{props.category.name}</h4>
-           <img src={props.category.img} style={{height: '200px',width:'200px'}}/>
-           </div>
+        <div onClick={() => props.onSelectCategory(props.category)} style={inline}>
+            <Card>
+                <CardImg top width="100%" src={props.category.img} />
+                <CardBody>
+                    <CardTitle>{props.category.name}</CardTitle>
+                </CardBody>
+            </Card>
         </div>
-        </Col>
+        
     )
 }
