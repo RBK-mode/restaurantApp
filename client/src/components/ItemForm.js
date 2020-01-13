@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Row, Col, Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap';
+import '../index.css';
 
 export class ItemForm extends Component {
   state = {
@@ -50,20 +52,24 @@ export class ItemForm extends Component {
   render() {
 
     return (
-      <form onSubmit={this.onSubmitHandler}>
-        <input type="text" placeholder="Item Name" value={this.state.name} onChange={this.onChangeNameHandler} />
-
-        <input type="text" placeholder="Price" value={this.state.price} onChange={this.onChangePriceHandler} />
-
-        <input type="text" placeholder="Image Source" value={this.state.img} onChange={this.onChangeImgHandler} />
-
-        <select onChange={this.onChangeSelectHandler}>
+      <form onSubmit={this.onSubmitHandler} className='mydiv'>
+        <FormGroup className='myform'>
+        <Input type="name" name="name" placeholder="Item Name" value={this.state.name} onChange={this.onChangeNameHandler} />
+        </FormGroup>
+        <FormGroup className='myform'>
+        <Input type="price" placeholder="Price" value={this.state.price} onChange={this.onChangePriceHandler} />
+        </FormGroup>
+        <FormGroup className='myform'>
+        <Input type="text" placeholder="Image Source" value={this.state.img} onChange={this.onChangeImgHandler} />
+        </FormGroup>
+        <FormGroup className='myform'>
+        < Input type="select" onChange={this.onChangeSelectHandler}>
           {this.props.ItemCategory.map(category => {
             return <option key={category._id} value={category._id}>{category.name}</option>
           })}
-        </select>
-
-        <button type="submit">Submit</button>
+        </Input>
+        </FormGroup>
+        <Button type="submit">Submit</Button>
       </form>
     )
   }
