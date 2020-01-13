@@ -37,7 +37,9 @@ export class CategoryList extends Component {
     }
 
     onSelectCategory = (selectedCategory) => {
-        this.setState(() => ({ selectedCategory }))
+        this.setState(() => ({ selectedCategory: {} }), () => {
+            this.setState(() => ({ selectedCategory }))
+        });
     }
 
     render() {

@@ -30,7 +30,6 @@ export default class CustomerOrder extends Component {
   }
 
   render() {
-    console.log(this.state.order)
     return (
       <Container>
         <Table>
