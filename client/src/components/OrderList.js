@@ -5,7 +5,6 @@ import OrderItem from './OrderItem';
 
 export class OrderList extends Component {
   render() {
-    console.log(this.props.orders)
     return (
       <Container>
         <Table>

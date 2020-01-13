@@ -64,7 +64,7 @@ class Home extends Component {
                 total += item.price;
             })
             order.total = total;
-            order.createdAt = moment(new Date(order.createdAt)).format('YYYY-MM-DD HH:mm');
+            order.createdAt = moment(new Date(order.createdAt)).format('DD-MM-YYYY HH:mm');
             return order;
         });
         this.props.setOrder(dataOrder);

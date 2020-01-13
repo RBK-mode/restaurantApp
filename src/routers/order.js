@@ -14,6 +14,15 @@ router.get('/', authAdmin, async (req, res) => {
     }
 });
 
+router.get('/:id', authAdmin, async (req, res) => {
+    try {
+        const doc = await Order.find({ customerId: req.params.id }).populate('customerId').exec();
+        res.status(200).json(doc)
+    } catch (err) {
+        res.status(400).send();
+    }
+})
+
 router.post('/', auth, async (req, res) => {
     try {
         var order = new Order(req.body);
