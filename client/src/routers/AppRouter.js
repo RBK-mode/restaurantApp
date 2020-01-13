@@ -19,14 +19,14 @@ const AppRouter = () => {
     <Router>
       <div>
         <Switch>
-          <PublicRoute path='/' component={Login} exact />
-          <PrivateRoute path='/Home' component={Home} />
-          <PrivateRoute path='/category' component={Category} />
-          <PrivateRoute path='/item' component={Item} />
-          <PrivateRoute path='/menu' component={Menu} />
-          <PrivateRoute path='/customer' component={Customer} />
-          <PrivateRoute path='/order' component={Order} exact />
-          <PrivateRoute path='/order/:id' component={CustomerOrder} />
+          <PublicRoute path='/admin/' component={Login} exact />
+          <PrivateRoute path='/admin/Home' component={Home} />
+          <PrivateRoute path='/admin/category' component={Category} />
+          <PrivateRoute path='/admin/item' component={Item} />
+          <PrivateRoute path='/admin/menu' component={Menu} />
+          <PrivateRoute path='/admin/customer' component={Customer} />
+          <PrivateRoute path='/admin/order' component={Order} exact />
+          <PrivateRoute path='/admin/order/:id' component={CustomerOrder} />
 
           <Route>
             <div>not found</div>

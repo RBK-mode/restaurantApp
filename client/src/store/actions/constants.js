@@ -16,3 +16,8 @@ export const DELETE_MENU_ITEM = 'DELETE_MENU_ITEM';
 export const SET_CUSTOMER = 'SET_CUSTOMER';
 
 export const SET_ORDER = 'SET_ORDER';
+export const ADD_ORDER = 'ADD_ORDER';
+
+export const NEW_REQUEST = 'NEW_REQUEST';
+export const APPROVE_REQUEST = 'APPROVE_REQUEST';
+export const REJECT_REQUEST = 'REJECT_REQUEST';

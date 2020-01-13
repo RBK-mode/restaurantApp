@@ -5,6 +5,7 @@ import itemReducer from './item';
 import menuReducer from './menu';
 import customerReducer from './customer';
 import orderReducer from './order';
+import requestReducer from './request';
 
 export default combineReducers({
     admin: adminReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     items: itemReducer,
     menu: menuReducer,
     customers: customerReducer,
-    orders: orderReducer
+    orders: orderReducer,
+    requests: requestReducer
 });
