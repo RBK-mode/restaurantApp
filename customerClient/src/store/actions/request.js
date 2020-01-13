@@ -16,7 +16,6 @@ export const requestOrder = (order) => async (dispatch, sto) => {
                 'auth': localStorage.getItem('token')
             }
         });
-        console.log(response)
         if(response.status === 201){
             let result = await response.json();
             dispatch(requestOrderActionCreator(result));

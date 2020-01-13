@@ -16,8 +16,10 @@ export const setCategory = () => async dispatch => {
         if(response.status === 200){
             let result = await response.json();
             dispatch(setCategoryActionCreator(result));
+            return Promise.resolve(result)
         }
     } catch(err) {
         console.log(err);
+        return Promise.reject(err)
     }
 }
