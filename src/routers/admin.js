@@ -27,6 +27,7 @@ router.post('/login', async (req, res) => {
         const token = await admin.generateAuthToken();
         res.send({admin, token});
     } catch (err) {
+        console.log(err)
         res.status(400).send();
     }
 });
