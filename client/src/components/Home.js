@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { logout } from './../store/actions/admin';
 import { setMenu } from '../store/actions/menu';
 import { setItem } from '../store/actions/item';
 import { setCategory } from '../store/actions/cateogry';
 import { setCustomer } from '../store/actions/customer';
 import { setOrder } from '../store/actions/order';
 import moment from 'moment';
+import { Card, CardText, Container, Col, Row } from 'reactstrap';
 
 class Home extends Component {
     async componentDidMount() {
@@ -71,21 +71,49 @@ class Home extends Component {
     }
 
     render() {
+        const approved = this.props.orders.filter(order => order.state === 'approved').length;
+        const rejected = this.props.orders.filter(order => order.state === 'rejected').length;
+
         return (
-            <div>
-                <h1>admin</h1>
-                <button onClick={() => { this.props.logout() }} >Logout</button>
-            </div>
+            <Container >
+                <br /><br />
+                <Row>
+                    <Col>
+                        <Card body inverse color="info">
+                            <CardText><h5>{this.props.customers.length} Customers</h5></CardText>
+                        </Card>
+                    </Col>
+                    <br /><br />
+                    <Col>
+                        <Card body inverse color="warning">
+                            <CardText><h5>{this.props.orders.length} Orders</h5></CardText>
+                        </Card>
+                    </Col>
+                </Row>
+                <br /><br />
+                <Row>
+                    <Col>
+                        <Card body inverse color="success">
+                            <CardText><h5>{approved} Approved Orders</h5></CardText>
+                        </Card>
+                    </Col>
+                    <Col>
+                        <Card body inverse color="danger">
+                            <CardText><h5>{rejected} Rejected Orders</h5></CardText>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-
+    customers: state.customers,
+    orders: state.orders
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    logout: () => dispatch(logout()),
     setMenu: (data) => dispatch(setMenu(data)),
     setCategory: (data) => {
         dispatch(setCategory(data));
