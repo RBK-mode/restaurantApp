@@ -19,5 +19,6 @@ export default function CategoryItem(props) {
                 </CardBody>
             </Card>
         </div>
+        
     )
 }
