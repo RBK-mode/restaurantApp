@@ -1,8 +1,13 @@
-import { REQUEST_ORDER } from './constants';
+import { REQUEST_ORDER, REQUEST_STATE } from './constants';
 
 
 export const requestOrderActionCreator = (payload) => ({
     type: REQUEST_ORDER,
+    payload
+})
+
+export const requestOrderState = (payload) => ({
+    type: REQUEST_STATE,
     payload
 })
 

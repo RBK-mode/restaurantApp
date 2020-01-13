@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Row, Button } from 'reactstrap';
 
 import MenuItem from './MenuItem';
-import { requestOrder } from './../store/actions/request';
+import { requestOrder, requestOrderState } from './../store/actions/request';
 
 import openSocket from 'socket.io-client';
 const  socket = openSocket('http://localhost:8000');
@@ -16,7 +16,8 @@ export class Menu extends Component {
             latitude: null,
             longitude: null
         },
-        itemsList: []
+        itemsList: [],
+        rejected: false
     }
 
     addToOrder = (item, check) => {
@@ -92,8 +93,17 @@ export class Menu extends Component {
             }
             console.log(order)
             try{
-                let req = await this.props.requestOrder(order);  
-                socket.emit('new-order', this.props.user, order); 
+                let req = await this.props.requestOrder(order);
+                socket.emit('new-order', this.props.user, this.props.request);
+                socket.on(this.props.request._id, (state) => {
+                    this.props.requestOrderState(state);
+                    if(state === 'rejected'){
+                        localStorage.setItem('new-order', JSON.stringify({...order, state}));
+                        this.setState(() => ({rejected: true}))
+                    } else {
+                        localStorage.removeItem('new-order');
+                    }
+                });
                 localStorage.setItem('new-order', JSON.stringify(order));
             } catch(err) {
                 console.log(err)
@@ -114,6 +124,9 @@ export class Menu extends Component {
                 <Row>
                     <Button className = 'center' color="secondary" onClick = {this.onRequestOrder} >order</Button>
                 </Row>
+                {
+                    this.state.rejected && <div> sorry your request has been rejected</div>
+                }
             </div>
         )
     }
@@ -124,11 +137,13 @@ const mapStateToProps = (state) => ({
         item.itemId.categoryId = state.category.filter(cat => cat._id === item.itemId.categoryId)[0] || '';
         return item;
     }), 
-    user: state.user
+    user: state.user,
+    request: state.request
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    requestOrder: (order) => dispatch(requestOrder(order))
+    requestOrder: (order) => dispatch(requestOrder(order)),
+    requestOrderState: (state) => dispatch(requestOrderState(state))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu)

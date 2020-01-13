@@ -48,6 +48,36 @@ router.post('/edit/:id', auth, async (req, res) => {
     } catch (error) {
         res.status(400).send();
     }
-})
+});
+
+router.post('/approve/:id', authAdmin, async (req, res) => {
+    try {
+        let order = await Order.findOneAndUpdate({ _id: req.params.id }, {state: 'approved'});
+        const doc = {
+            ...order,
+            state: 'approved'
+        }
+        res.status(200).json(doc);
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).send();
+    }
+});
+
+router.post('/reject/:id', authAdmin, async (req, res) => {
+    try {
+        let order = await Order.findOneAndUpdate({ _id: req.params.id }, {state: 'rejected'});
+        const doc = {
+            ...order,
+            state: 'rejected'
+        }
+        res.status(200).json(doc);
+
+    } catch (error) {
+        console.log(error)
+        res.status(400).send();
+    }
+});
 
 module.exports = router

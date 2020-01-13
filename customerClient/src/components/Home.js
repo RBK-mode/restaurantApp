@@ -81,7 +81,6 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    logout: () => dispatch(logout()),
     setCategory: () => dispatch(setCategory()),
     setMenu: () => dispatch(setMenu())
 })
