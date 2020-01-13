@@ -6,8 +6,6 @@ import { Redirect } from 'react-router-dom';
 
 import { setMenu } from './../store/actions/menu';
 import { setCategory } from './../store/actions/category';
-import '../index.css'
-
 
 import { logout } from './../store/actions/user';
 
