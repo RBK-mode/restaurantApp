@@ -26,7 +26,6 @@ const adminSchema = mongoose.Schema({
     }]
 })
 
-
 adminSchema.pre('save', async function (next) {
     const admin = this;
     if (admin.isModified('password')) {

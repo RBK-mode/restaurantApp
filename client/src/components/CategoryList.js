@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setCategory, addCategory, editCategory } from '../store/actions/cateogry';
+import { addCategory, editCategory } from '../store/actions/cateogry';
 import CategoryItem from './CategoryItem';
 import CategoryForm from './CategoryForm';
-
+import {Row, Col, Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap';
 
 export class CategoryList extends Component {
     state = {
@@ -48,10 +48,12 @@ export class CategoryList extends Component {
                     this.state.selectedCategory._id && <CategoryForm onSubmit={(category) => this.editCategory(category)} selectedCategory={this.state.selectedCategory} />
                 }
                 <div>
+                    <Row>
                     {
                         this.props.cateogries.map((category) => <CategoryItem key={category._id} onSelectCategory={this.onSelectCategory} category={category} />)
 
                     }
+                    </Row>
                 </div>
             </div>
         )
@@ -64,7 +66,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        
+
         addCategory: (data) => {
             dispatch(addCategory(data));
         },

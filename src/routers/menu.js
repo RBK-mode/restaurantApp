@@ -5,7 +5,7 @@ const Category = require('../models/category');
 
 const router = express.Router();
 
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const doc = await Menu.find().populate('itemId').exec();
         res.status(200).json(doc);
@@ -32,8 +32,7 @@ router.post('/', auth, async (req, res) => {
 
 router.post('/delete/:id', auth, async (req, res) => {
     try {
-        await Menu.find({itemId: req.params.id}).remove().exec();
-        console.log( req.params.id, 55555555555)
+        await Menu.find({ itemId: req.params.id }).remove().exec();
         res.status(200).json();
     } catch {
         res.status(400).send();

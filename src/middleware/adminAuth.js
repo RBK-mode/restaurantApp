@@ -9,7 +9,11 @@ const auth = async(req, res, next) => {
         if(!admin){
             throw new Error();
         }
-        req.admin = admin;
+        req.admin = {
+            _id: admin._id,
+            name: admin.name,
+            email: admin.email,
+        };
         req.token = token;
         next();
     } catch(error) {

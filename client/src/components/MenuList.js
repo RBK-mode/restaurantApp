@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setMenu, addMenuItem, deleteMenuItemDispatcher } from '../store/actions/menu';
 import ItemItem from './ItemItem';
-
+import {Row, Col, Button, Form, FormGroup, Label, Input, FormText} from 'reactstrap';
 
 export class MenuList extends Component {
     state = {
@@ -12,9 +12,11 @@ export class MenuList extends Component {
     render() {
         return (
             <div>
+                <Row>
                 {
                     this.props.menu.map(item => <ItemItem  key={item._id} item={item.itemId} />)
                 }
+                </Row>
             </div>
         )
     }

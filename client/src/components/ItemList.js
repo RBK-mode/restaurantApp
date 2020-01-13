@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setItem, addItem, editItem } from '../store/actions/item';
+import { addItem, editItem } from '../store/actions/item';
 import { addMenuItem, deleteMenuItem } from '../store/actions/menu';
 import ItemItem from './ItemItem';
 import ItemForm from './ItemForm';
+import { Collapse, Button, CardBody, Card, Col, Row } from 'reactstrap';
+import '../index.css';
 
 
 export class ItemList extends Component {
   state = {
-    selectedItem: {}
+    selectedItem: {},
+    displayForm: false
   }
 
   addItem = async (param) => {
@@ -28,7 +31,7 @@ export class ItemList extends Component {
     }
   };
 
- 
+
   editItem = async (param) => {
     const response = await fetch("http://localhost:8000/api/item/edit/" + param._id, {
       method: 'POST',
@@ -51,17 +54,32 @@ export class ItemList extends Component {
 
   render() {
     return (
-      <div>
+
+      <div className='itemListContainer'>
+        {
+          this.state.displayForm &&
+         <div className='itemListForm'>
         <ItemForm onSubmit={(item) => this.addItem(item)} />
         {
           this.state.selectedItem._id && <ItemForm onSubmit={item => this.editItem(item)} selectedItem=
             {this.state.selectedItem} />
         }
+         </div>
+        }
 
-        <div>
-          {
-            this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} />)
-          }
+          <div>
+            <Row>
+            {
+              this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} />)
+            }
+            </Row>
+            <Button onClick={()=>{
+              this.setState((prevState)=>{
+                return {
+                  displayForm : !prevState.displayForm
+                }
+              })
+            }} className='addItem'>Add Item</Button>
         </div>
       </div>
     )
@@ -74,7 +92,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-       addItem: (data) => {
+    addItem: (data) => {
       dispatch(addItem(data));
     },
     editItem: (data) => {
@@ -83,8 +101,8 @@ const mapDispatchToProps = (dispatch) => {
     addMenuItem: (data) => {
       dispatch(addMenuItem(data));
     },
-    deleteMenuItem:(data) =>{
-        dispatch(deleteMenuItem(data));
+    deleteMenuItem: (data) => {
+      dispatch(deleteMenuItem(data));
     }
   }
 }

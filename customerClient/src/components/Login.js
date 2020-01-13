@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from './../store/actions/user';
-import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { Button,Col, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import '../index.css';
 
 export class Login extends Component {
     constructor(props){
@@ -37,20 +38,20 @@ export class Login extends Component {
 
     render() {
         return (
-            <Container>
-                <Form onSubmit = {this.handleSubmit}>
-                    <FormGroup>
+              <Col className = 'category-container'>
+                <form onSubmit = {this.handleSubmit} className='mydiv'>
+                    <FormGroup className='myform'>
                         <Label for="exampleEmail">Email</Label>
                         <Input type="email" name="email" placeholder="example@example.com" onChange = {this.handleEmailChange} value = {this.state.email}/>
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className='myform'>
                         <Label for="examplePassword">Password</Label>
                         <Input type="password" name="password" placeholder="password" onChange = {this.handlePasswordChange} value = {this.state.password} />
                     </FormGroup>
-                    <Button>Submit</Button>
-                    <Link to='/signup'>sign up</Link>
-                </Form>
-            </Container>
+                    <Button type="submit" className="btn-lg btn-green btn-block">Submit</Button>
+                     <Link to='/signup'>sign up</Link>
+                </form>
+             </Col>
         )
     }
 }
