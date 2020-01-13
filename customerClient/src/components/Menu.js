@@ -94,10 +94,10 @@ export class Menu extends Component {
             try{
                 let req = await this.props.requestOrder(order);  
                 socket.emit('new-order', this.props.user, order); 
+                localStorage.setItem('new-order', JSON.stringify(order));
             } catch(err) {
                 console.log(err)
             }
-            
         } catch(err) {
             alert(' sorry, we couldnt access your location.')
         }

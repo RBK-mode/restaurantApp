@@ -4,11 +4,14 @@ import { addItem, editItem } from '../store/actions/item';
 import { addMenuItem, deleteMenuItem } from '../store/actions/menu';
 import ItemItem from './ItemItem';
 import ItemForm from './ItemForm';
+import { Collapse, Button, CardBody, Card, Col, Row, Container } from 'reactstrap';
+import '../index.css';
 
 
 export class ItemList extends Component {
   state = {
-    selectedItem: {}
+    selectedItem: {},
+    displayForm: false
   }
 
   addItem = async (param) => {
@@ -52,17 +55,35 @@ export class ItemList extends Component {
   render() {
     return (
       <div>
-        <ItemForm onSubmit={(item) => this.addItem(item)} />
-        {
-          this.state.selectedItem._id && <ItemForm onSubmit={item => this.editItem(item)} selectedItem=
-            {this.state.selectedItem} />
-        }
-
-        <div>
-          {
-            this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} />)
-          }
+        <div style={{ display: 'flex', flexDirection: "row-reverse" }}>
+          <Button style={{ width: '150px', backgroundColor: '#52BC42', justifyContentContent: 'flex-end' }} onClick={() => {
+            this.setState((prevState) => {
+              return {
+                displayForm: !prevState.displayForm
+              }
+            })
+          }} className='addItem'>Add New Item</Button>
         </div>
+        <Container className='itemListContainer'>
+          {
+            this.state.displayForm &&
+            <div className='itemListForm'>
+              <ItemForm onSubmit={(item) => this.addItem(item)} />
+              {
+                this.state.selectedItem._id && <ItemForm onSubmit={item => this.editItem(item)} selectedItem=
+                  {this.state.selectedItem} />
+              }
+            </div>
+          }
+
+          <div>
+            <Row>
+              {
+                this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} />)
+              }
+            </Row>
+          </div>
+        </Container>
       </div>
     )
   }
