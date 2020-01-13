@@ -54,33 +54,37 @@ export class ItemList extends Component {
 
   render() {
     return (
-      <Container className='itemListContainer'>
-        <Button style={{ width: '150px', backgroundColor: '#52BC42' }} onClick={() => {
-          this.setState((prevState) => {
-            return {
-              displayForm: !prevState.displayForm
-            }
-          })
-        }} className='addItem'>Add New Item</Button>
-        {
-          this.state.displayForm &&
-          <div className='itemListForm'>
-            <ItemForm onSubmit={(item) => this.addItem(item)} />
-            {
-              this.state.selectedItem._id && <ItemForm onSubmit={item => this.editItem(item)} selectedItem=
-                {this.state.selectedItem} />
-            }
-          </div>
-        }
-
-        <div>
-          <Row>
-            {
-              this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} />)
-            }
-          </Row>
+      <div>
+        <div style={{ display: 'flex', flexDirection: "row-reverse" }}>
+          <Button style={{ width: '150px', backgroundColor: '#52BC42', justifyContentContent: 'flex-end' }} onClick={() => {
+            this.setState((prevState) => {
+              return {
+                displayForm: !prevState.displayForm
+              }
+            })
+          }} className='addItem'>Add New Item</Button>
         </div>
-      </Container>
+        <Container className='itemListContainer'>
+          {
+            this.state.displayForm &&
+            <div className='itemListForm'>
+              <ItemForm onSubmit={(item) => this.addItem(item)} />
+              {
+                this.state.selectedItem._id && <ItemForm onSubmit={item => this.editItem(item)} selectedItem=
+                  {this.state.selectedItem} />
+              }
+            </div>
+          }
+
+          <div>
+            <Row>
+              {
+                this.props.items.map((item) => <ItemItem key={item._id} item={item} onSelectedItem={this.onSelectedItem} />)
+              }
+            </Row>
+          </div>
+        </Container>
+      </div>
     )
   }
 }

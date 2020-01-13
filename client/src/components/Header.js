@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+import { logout } from './../store/actions/admin';
+
 import {
     Collapse,
     Navbar,
@@ -27,11 +29,14 @@ export class Header extends Component {
             <div>
                 <Navbar color="light" light expand="md">
                     <NavbarBrand>
+                        <img src={require('./../logoT.png')} style={{ height: '100px', width: '100px' }} />
+                    </NavbarBrand>
+                    <NavbarBrand>
                         <Link to="/Home">Home</Link>
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="mr-auto" navbar>
+                        <Nav className="mr-auto" navbar >
                             <NavItem>
                                 <NavLink>
                                     <Link to='/Category'>Categories</Link>
@@ -57,7 +62,14 @@ export class Header extends Component {
                                     <Link to='/Order'>Orders</Link>
                                 </NavLink>
                             </NavItem>
-                            <NavbarText>4 Glasses</NavbarText>
+                            <NavItem style={{ cursor: 'pointer' }}>
+                                <NavLink onClick={() => { this.props.logout() }}>Logout</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavbarText>
+                                    {this.props.admin.name}
+                                </NavbarText>
+                            </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>
@@ -67,11 +79,11 @@ export class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    admin: state.admin
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = (dispatch) => ({
+    logout: () => dispatch(logout())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
