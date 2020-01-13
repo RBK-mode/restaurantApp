@@ -63,4 +63,6 @@ export const logout = (token) => async dispatch => {
     } catch(err) {
         console.log(err)
     }
+    dispatch(logoutActionCreator());
+    localStorage.removeItem('token');
 }

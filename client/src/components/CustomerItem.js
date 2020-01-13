@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function CustomerItem(props) {
   return (
     <tr>
-      <Link to={"/order/" + props.customer._id}>
+      <Link to={"/admin/order/" + props.customer._id}>
         <td>
           {props.customer.name}
         </td>

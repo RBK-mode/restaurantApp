@@ -6,7 +6,12 @@ import { setItem } from '../store/actions/item';
 import { setCategory } from '../store/actions/cateogry';
 import { setCustomer } from '../store/actions/customer';
 import { setOrder } from '../store/actions/order';
+import{ newRequest } from '../store/actions/request';
+
 import moment from 'moment';
+
+import openSocket from 'socket.io-client';
+export const  socket = openSocket('http://localhost:8000');
 
 class Home extends Component {
     async componentDidMount() {
@@ -68,6 +73,9 @@ class Home extends Component {
             return order;
         });
         this.props.setOrder(dataOrder);
+        socket.on('handle-new-order', (customer, order) => {
+            this.props.newRequest({...order, customerId: customer});
+        })
     }
 
     render() {
@@ -98,6 +106,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     setOrder: (data) => {
         dispatch(setOrder(data));
+    },
+    newRequest: (data) => {
+        dispatch(newRequest(data));
     }
 })
 
